@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BMAX Roblox Tools</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 10% 0%,#7c3aed66,transparent 28%),
+        radial-gradient(circle at 90% 10%,#06b6d455,transparent 28%),
+        radial-gradient(circle at 50% 100%,#2563eb55,transparent 35%),
+        #030712;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(#ffffff04 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff04 1px,transparent 1px);
+    background-size:35px 35px;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:35px 18px 15px;
+    position:relative;
+    z-index:1;
+}
+
+.company{
+    display:inline-block;
+    padding:9px 17px;
+    border-radius:50px;
+    border:1px solid #8b5cf666;
+    background:#ffffff08;
+    color:#c4b5fd;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+header h1{
+    margin:0;
+    font-size:clamp(40px,10vw,70px);
+    font-weight:900;
+    background:linear-gradient(
+        90deg,
+        #60a5fa,
+        #a78bfa,
+        #22d3ee
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+header p{
+    color:#94a3b8;
+    font-size:16px;
+}
+
+/* BACK BUTTON */
+
+.back{
+    max-width:1100px;
+    margin:10px auto;
+    padding:0 15px;
+}
+
+.back button{
+    width:auto;
+    padding:11px 18px;
+    border-radius:12px;
+}
+
+/* BUTTON */
+
+button{
+    border:0;
+    cursor:pointer;
+    color:#fff;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.main-btn{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+    transition:.2s;
+}
+
+.main-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px #7c3aed55;
+}
+
+.main-btn:active{
+    transform:scale(.97);
+}
+
+/* TOOLS */
+
+.tools{
+    max-width:1100px;
+    margin:20px auto;
+    padding:15px;
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(270px,1fr));
+    gap:22px;
+}
+
+/* CARD */
+
+.card{
+    position:relative;
+    padding:24px;
+    border-radius:25px;
+    border:1px solid #ffffff12;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff10,
+            #ffffff04
+        );
+    backdrop-filter:blur(20px);
+    box-shadow:0 20px 50px #00000055;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    right:-60px;
+    top:-60px;
+    border-radius:50%;
+    background:#7c3aed44;
+    filter:blur(35px);
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:#8b5cf666;
+}
+
+.icon{
+    font-size:45px;
+}
+
+.card h2{
+    margin:13px 0 8px;
+}
+
+.card p{
+    color:#94a3b8;
+    line-height:1.5;
+    min-height:44px;
+}
+
+/* TOOL */
+
+.tool{
+    display:none;
+    margin-top:18px;
+    animation:show .25s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* INPUT */
+
+input{
+    width:100%;
+    padding:14px;
+    margin:6px 0 10px;
+    border-radius:13px;
+    border:1px solid #ffffff1c;
+    background:#020617dd;
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#60a5fa;
+    box-shadow:0 0 15px #2563eb22;
+}
+
+input::placeholder{
+    color:#64748b;
+}
+
+/* RESULT */
+
+.result{
+    margin-top:13px;
+    padding:15px;
+    border-radius:15px;
+    background:#020617aa;
+    border:1px solid #ffffff0c;
+    color:#c4b5fd;
+    text-align:center;
+    word-break:break-word;
+}
+
+.result img{
+    display:block;
+    width:180px;
+    max-width:100%;
+    margin:8px auto 15px;
+    border-radius:18px;
+    box-shadow:0 10px 35px #000;
+}
+
+.profile-name{
+    color:#fff;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.small{
+    color:#94a3b8;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.result a{
+    color:#60a5fa;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.result a:hover{
+    text-decoration:underline;
+}
+
+/* GAME */
+
+.game{
+    text-align:left;
+    padding:13px;
+    margin:10px 0;
+    border-radius:16px;
+    background:#ffffff07;
+    border:1px solid #ffffff0c;
+    min-height:100px;
+}
+
+.game img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    float:left;
+    margin:0 12px 8px 0;
+    border-radius:13px;
+}
+
+.game::after{
+    content:"";
+    display:block;
+    clear:both;
+}
+
+.game h3{
+    margin:5px 0 8px;
+    color:white;
+}
+
+/* ROBUX */
+
+.robux-number{
+    font-size:32px;
+    font-weight:bold;
+    color:#22d3ee;
+    margin:10px 0;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:50px 20px 30px;
+    color:#64748b;
+}
+
+.brand{
+    color:#a78bfa;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* TOP */
+
+.top{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+    font-size:22px;
+    z-index:10;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header{
+        padding-top:28px;
+    }
+
+    header h1{
+        font-size:42px;
+    }
+
+    .tools{
+        grid-template-columns:1fr;
+        padding:14px;
+    }
+
+    .card{
+        padding:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="company">
+        ⚡ BMAX CLAUDE COMPANY
+    </div>
+
+    <h1>🎮 Roblox Tools</h1>
+
+    <p>
+        Roblox uchun foydali vositalar 🚀
+    </p>
+
+</header>
+
+
+<!-- BACK -->
+
+<div class="back">
+
+    <button
+        class="main-btn"
+        onclick="goHome()">
+
+        🏠 BMAX Online Tools
+
+    </button>
+
+</div>
+
+
+<main class="tools">
+
+
+<!-- ========================= -->
+<!-- PROFILE SEARCH -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">👤</div>
+
+    <h2>Avatar Profile Search</h2>
+
+    <p>
+        Roblox username orqali avatar
+        va profil ma'lumotlarini toping.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('profileTool')">
+
+        🔍 Ochish
+
+    </button>
+
+    <div
+        id="profileTool"
+        class="tool">
+
+        <input
+            id="profileUsername"
+            placeholder="Username masalan: Roblox">
+
+        <button
+            class="main-btn"
+            onclick="findProfile()">
+
+            🔎 Profilni qidirish
+
+        </button>
+
+        <div
+            id="profileResult"
+            class="result">
+
+            Username kiriting.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- USERNAME CHECKER -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">🔎</div>
+
+    <h2>Username Checker</h2>
+
+    <p>
+        Username Roblox'da mavjudligini
+        tekshiring.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('checkerTool')">
+
+        🔍 Ochish
+
+    </button>
+
+    <div
+        id="checkerTool"
+        class="tool">
+
+        <input
+            id="checkerUsername"
+            placeholder="Username">
+
+        <button
+            class="main-btn"
+            onclick="checkUsername()">
+
+            🔎 Tekshirish
+
+        </button>
+
+        <div
+            id="checkerResult"
+            class="result">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- ROBUX CALCULATOR -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">💰</div>
+
+    <h2>Robux Calculator</h2>
+
+    <p>
+        Robux miqdori va siz belgilagan
+        narx bo‘yicha hisoblang.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('robuxTool')">
+
+        💰 Ochish
+
+    </button>
+
+    <div
+        id="robuxTool"
+        class="tool">
+
+        <input
+            type="number"
+            id="robuxAmount"
+            placeholder="Robux miqdori">
+
+        <input
+            type="number"
+            id="robuxPrice"
+            placeholder="1 Robux narxi">
+
+        <button
+            class="main-btn"
+            onclick="calculateRobux()">
+
+            🧮 Hisoblash
+
+        </button>
+
+        <div
+            id="robuxResult"
+            class="result">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- GAME FINDER -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">🎮</div>
+
+    <h2>Game Finder</h2>
+
+    <p>
+        Roblox o‘yinlarini qidirish.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('gameTool')">
+
+        🎮 Ochish
+
+    </button>
+
+    <div
+        id="gameTool"
+        class="tool">
+
+        <input
+            id="gameQuery"
+            placeholder="Masalan: obby">
+
+        <button
+            class="main-btn"
+            onclick="findGames()">
+
+            🔍 Game qidirish
+
+        </button>
+
+        <div
+            id="gameResult"
+            class="result">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- PROFILE LINK -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">🌐</div>
+
+    <h2>Roblox Profile Link</h2>
+
+    <p>
+        Username orqali Roblox qidiruv
+        sahifasini oching.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('profileLinkTool')">
+
+        🌐 Ochish
+
+    </button>
+
+    <div
+        id="profileLinkTool"
+        class="tool">
+
+        <input
+            id="profileLink"
+            placeholder="Username">
+
+        <button
+            class="main-btn"
+            onclick="openProfile()">
+
+            🚀 Roblox'da ochish
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- GAME LINK -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="icon">🚀</div>
+
+    <h2>Roblox Game Link</h2>
+
+    <p>
+        Roblox o‘yin ID'si orqali
+        o‘yin sahifasini oching.
+    </p>
+
+    <button
+        class="main-btn"
+        onclick="openTool('gameLinkTool')">
+
+        🚀 Ochish
+
+    </button>
+
+    <div
+        id="gameLinkTool"
+        class="tool">
+
+        <input
+            id="placeId"
+            placeholder="Place ID">
+
+        <button
+            class="main-btn"
+            onclick="openGame()">
+
+            🎮 O‘yinni ochish
+
+        </button>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <div class="brand">
+        ⚡ BMAX CLAUDE COMPANY
+    </div>
+
+    <p>
+        🎮 BMAX Roblox Tools
+    </p>
+
+    <p>
+        © 2026 — Online Tools
+    </p>
+
+</footer>
+
+
+<button
+    class="top"
+    onclick="window.scrollTo(0,0)">
+
+    ↑
+
+</button>
+
+
+<script>
+
+/* =========================
+   HOME
+========================= */
+
+function goHome(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================
+   OPEN TOOL
+========================= */
+
+function openTool(id){
+
+    const tool =
+        document.getElementById(id);
+
+    if(tool.style.display === "block"){
+
+        tool.style.display = "none";
+
+    }else{
+
+        tool.style.display = "block";
+
+    }
+
+}
+
+
+/* =========================
+   PROFILE SEARCH
+========================= */
+
+async function findProfile(){
+
+    const username =
+        document
+        .getElementById("profileUsername")
+        .value
+        .trim();
+
+    const result =
+        document
+        .getElementById("profileResult");
+
+    if(!username){
+
+        result.innerHTML =
+            "⚠️ Username kiriting!";
+
+        return;
+
+    }
+
+    result.innerHTML =
+        "⏳ Profil qidirilmoqda...";
+
+    try{
+
+        const response =
+            await fetch(
+                "https://users.roblox.com/v1/usernames/users",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        usernames:[username],
+
+                        excludeBannedUsers:false
+
+                    })
+                }
+            );
+
+        if(!response.ok){
+
+            throw new Error();
+
+        }
+
+        const data =
+            await response.json();
+
+        if(
+            !data.data ||
+            data.data.length === 0
+        ){
+
+            result.innerHTML =
+                "❌ Username topilmadi.";
+
+            return;
+
+        }
+
+        const user =
+            data.data[0];
+
+        let avatar = "";
+
+        try{
+
+            const avatarResponse =
+                await fetch(
+                    "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" +
+                    user.id +
+                    "&size=420x420&format=Png&isCircular=false"
+                );
+
+            const avatarData =
+                await avatarResponse.json();
+
+            if(
+                avatarData.data &&
+                avatarData.data[0]
+            ){
+
+                avatar =
+                    avatarData.data[0].imageUrl;
+
+            }
+
+        }catch(e){
+
+            avatar = "";
+
+        }
+
+        result.innerHTML = `
+
+            ${
+                avatar
+                ?
+                `<img
+                    src="${avatar}"
+                    alt="Roblox Avatar">`
+                :
+                ""
+            }
+
+            <div class="profile-name">
+                ${escapeHTML(user.name)}
+            </div>
+
+            <div class="small">
+                Display Name:
+                ${escapeHTML(
+                    user.displayName || user.name
+                )}
+            </div>
+
+            <div class="small">
+                🆔 User ID: ${user.id}
+            </div>
+
+            <br>
+
+            <a
+                href="https://www.roblox.com/users/${user.id}/profile"
+                target="_blank">
+
+                🌐 Profilni ochish
+
+            </a>
+
+        `;
+
+    }catch(error){
+
+        result.innerHTML = `
+            ❌ Roblox API bilan bog‘lanib bo‘lmadi.
+            <br><br>
+            Internetni tekshirib qayta urinib ko‘ring.
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   USERNAME CHECKER
+========================= */
+
+async function checkUsername(){
+
+    const username =
+        document
+        .getElementById("checkerUsername")
+        .value
+        .trim();
+
+    const result =
+        document
+        .getElementById("checkerResult");
+
+    if(!username){
+
+        result.innerHTML =
+            "⚠️ Username kiriting!";
+
+        return;
+
+    }
+
+    if(username.length < 3){
+
+        result.innerHTML =
+            "⚠️ Username juda qisqa.";
+
+        return;
+
+    }
+
+    result.innerHTML =
+        "⏳ Tekshirilmoqda...";
+
+    try{
+
+        const response =
+            await fetch(
+                "https://users.roblox.com/v1/usernames/users",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        usernames:[username],
+
+                        excludeBannedUsers:false
+
+                    })
+                }
+            );
+
+        if(!response.ok){
+
+            throw new Error();
+
+        }
+
+        const data =
+            await response.json();
+
+        if(
+            data.data &&
+            data.data.length > 0
+        ){
+
+            result.innerHTML = `
+                🔴 <b>Username band.</b>
+                <br><br>
+                👤 Roblox'da bunday foydalanuvchi mavjud.
+            `;
+
+        }else{
+
+            result.innerHTML = `
+                🟢 <b>Username topilmadi.</b>
+                <br><br>
+                ℹ️ Roblox'da ro‘yxatdan o‘tkazishda
+                boshqa qoidalar ham tekshirilishi mumkin.
+            `;
+
+        }
+
+    }catch(error){
+
+        result.innerHTML =
+            "❌ Tekshirishda xatolik.";
+
+    }
+
+}
+
+
+/* =========================
+   ROBUX CALCULATOR
+========================= */
+
+function calculateRobux(){
+
+    const amount =
+        parseFloat(
+            document
+            .getElementById("robuxAmount")
+            .value
+        );
+
+    const price =
+        parseFloat(
+            document
+            .getElementById("robuxPrice")
+            .value
+        );
+
+    const result =
+        document
+        .getElementById("robuxResult");
+
+    if(
+        isNaN(amount) ||
+        isNaN(price) ||
+        amount < 0 ||
+        price < 0
+    ){
+
+        result.innerHTML =
+            "⚠️ Ikkala qiymatni ham kiriting.";
+
+        return;
+
+    }
+
+    const total =
+        amount * price;
+
+    result.innerHTML = `
+
+        <div class="robux-number">
+            ${total.toLocaleString()}
+        </div>
+
+        💰 Umumiy qiymat
+
+        <br><br>
+
+        Robux:
+        ${amount.toLocaleString()}
+
+        <br>
+
+        1 Robux:
+        ${price.toLocaleString()}
+
+    `;
+
+}
+
+
+/* =========================
+   GAME FINDER
+========================= */
+
+async function findGames(){
+
+    const query =
+        document
+        .getElementById("gameQuery")
+        .value
+        .trim();
+
+    const result =
+        document
+        .getElementById("gameResult");
+
+    if(!query){
+
+        result.innerHTML =
+            "⚠️ O‘yin nomini yozing!";
+
+        return;
+
+    }
+
+    result.innerHTML =
+        "⏳ O‘yinlar qidirilmoqda...";
+
+    try{
+
+        const url =
+            "https://apis.roblox.com/search-api/omni-search" +
+            "?searchQuery=" +
+            encodeURIComponent(query) +
+            "&pageType=all";
+
+        const response =
+            await fetch(url);
+
+        if(!response.ok){
+
+            throw new Error();
+
+        }
+
+        const data =
+            await response.json();
+
+        const games =
+            extractGames(data);
+
+        if(games.length === 0){
+
+            result.innerHTML = `
+                ❌ O‘yin topilmadi.
+                <br><br>
+                <a
+                    href="https://www.roblox.com/discover"
+                    target="_blank">
+
+                    🎮 Roblox Discover
+
+                </a>
+            `;
+
+            return;
+
+        }
+
+        result.innerHTML =
+            games
+            .slice(0,8)
+            .map(game => {
+
+                const id =
+                    game.universeId ||
+                    game.placeId ||
+                    game.rootPlaceId ||
+                    game.id;
+
+                const name =
+                    game.name ||
+                    game.title ||
+                    "Roblox Game";
+
+                const creator =
+                    game.creatorName ||
+                    (
+                        game.creator &&
+                        game.creator.name
+                    ) ||
+                    "Unknown";
+
+                const image =
+                    game.thumbnailUrl ||
+                    game.imageUrl ||
+                    game.iconUrl ||
+                    "";
+
+                const link =
+                    id
+                    ?
+                    "https://www.roblox.com/games/" +
+                    id
+                    :
+                    "https://www.roblox.com/discover";
+
+                return `
+
+                    <div class="game">
+
+                        ${
+                            image
+                            ?
+                            `<img
+                                src="${image}"
+                                alt="">`
+                            :
+                            ""
+                        }
+
+                        <h3>
+                            ${escapeHTML(name)}
+                        </h3>
+
+                        <div class="small">
+                            👤 ${escapeHTML(creator)}
+                        </div>
+
+                        <br>
+
+                        <a
+                            href="${link}"
+                            target="_blank">
+
+                            🚀 O‘yinni ochish
+
+                        </a>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+    }catch(error){
+
+        result.innerHTML = `
+            ❌ Game Finder API hozir javob bermadi.
+            <br><br>
+
+            <a
+                href="https://www.roblox.com/discover"
+                target="_blank">
+
+                🎮 Roblox Discover'ni ochish
+
+            </a>
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   GAME DATA
+========================= */
+
+function extractGames(data){
+
+    const found = [];
+
+    function walk(value){
+
+        if(!value)
+            return;
+
+        if(Array.isArray(value)){
+
+            value.forEach(walk);
+
+            return;
+
+        }
+
+        if(typeof value !== "object")
+            return;
+
+        const isGame =
+            value.name &&
+            (
+                value.universeId ||
+                value.placeId ||
+                value.rootPlaceId
+            );
+
+        if(isGame){
+
+            found.push(value);
+
+        }
+
+        Object
+        .values(value)
+        .forEach(walk);
+
+    }
+
+    walk(data);
+
+    const unique = [];
+    const ids = new Set();
+
+    found.forEach(item => {
+
+        const id =
+            item.universeId ||
+            item.placeId ||
+            item.rootPlaceId;
+
+        if(
+            id &&
+            !ids.has(String(id))
+        ){
+
+            ids.add(String(id));
+
+            unique.push(item);
+
+        }
+
+    });
+
+    return unique;
+
+}
+
+
+/* =========================
+   PROFILE LINK
+========================= */
+
+function openProfile(){
+
+    const username =
+        document
+        .getElementById("profileLink")
+        .value
+        .trim();
+
+    if(!username){
+
+        alert("Username kiriting!");
+
+        return;
+
+    }
+
+    window.open(
+        "https://www.roblox.com/search/users?keyword=" +
+        encodeURIComponent(username),
+
+        "_blank"
+    );
+
+}
+
+
+/* =========================
+   GAME LINK
+========================= */
+
+function openGame(){
+
+    const id =
+        document
+        .getElementById("placeId")
+        .value
+        .trim();
+
+    if(!id){
+
+        alert("Place ID kiriting!");
+
+        return;
+
+    }
+
+    window.open(
+        "https://www.roblox.com/games/" +
+        encodeURIComponent(id),
+
+        "_blank"
+    );
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replaceAll("&","&amp;")
+
+        .replaceAll("<","&lt;")
+
+        .replaceAll(">","&gt;")
+
+        .replaceAll('"',"&quot;")
+
+        .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
